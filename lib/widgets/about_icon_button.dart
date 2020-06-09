@@ -36,7 +36,7 @@ class AboutIconButton extends StatelessWidget {
                       ),
                     ),
                     onTap: () {
-                      _launchURL("https://www.github.com");
+                      _launchURL("https://github.com/suvansh-rana/wisdom_quotes");
                     },
                   ),
                 ],
