@@ -30,7 +30,7 @@ class AboutIconButton extends StatelessWidget {
                   Text("Quotes from "),
                   GestureDetector(
                     child: Text(
-                      " quotable",
+                      " Quotable",
                       style: TextStyle(
                         color: Colors.blue,
                       ),
@@ -67,7 +67,7 @@ class AboutIconButton extends StatelessWidget {
                   ),
                   GestureDetector(
                     child: Text(
-                      " Suvansh Rana",
+                      " Suvansh",
                       style: TextStyle(
                         color: Colors.blue,
                       ),
