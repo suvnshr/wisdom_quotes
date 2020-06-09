@@ -27,6 +27,23 @@ class AboutIconButton extends StatelessWidget {
             children: <Widget>[
               Row(
                 children: <Widget>[
+                  Text("Quotes from "),
+                  GestureDetector(
+                    child: Text(
+                      " quotable",
+                      style: TextStyle(
+                        color: Colors.blue,
+                      ),
+                    ),
+                    onTap: () {
+                      _launchURL("https://github.com/lukePeavey/quotable");
+                    },
+                  ),
+                ],
+              ),
+              SizedBox(height: 20),
+              Row(
+                children: <Widget>[
                   Text("Get the code"),
                   GestureDetector(
                     child: Text(
