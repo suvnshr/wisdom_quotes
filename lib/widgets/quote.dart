@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 // The widget which renders the quote and author name
 class Quote extends StatelessWidget {
-  String quote;
-  String author;
+  final String quote;
+  final String author;
 
   Quote({this.quote, this.author});
 
