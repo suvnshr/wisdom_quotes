@@ -4,6 +4,7 @@ import 'package:wisdom_quotes/widgets/about_icon_button.dart';
 import 'package:wisdom_quotes/widgets/quote.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:share/share.dart';
 
 // The main widget
 class MainApp extends StatefulWidget {
@@ -62,6 +63,8 @@ class _MainAppState extends State<MainApp> {
     );
   }
 
+  void shareQuote(quote, author) => Share.share('$quote - $author');
+
   void initState() {
     super.initState();
     loadQuote();
@@ -69,10 +72,8 @@ class _MainAppState extends State<MainApp> {
 
   @override
   Widget build(BuildContext context) {
-    
     // Load quote if not already loaded
-    if (quote == "" && author == "") 
-      loadQuote(thisTag: tag);
+    if (quote == "" && author == "") loadQuote(thisTag: tag);
 
     ThemeData currentTheme = Get.theme;
 
@@ -152,6 +153,17 @@ class _MainAppState extends State<MainApp> {
                 ),
                 SizedBox(height: 40),
                 getStatusWidget(),
+                SizedBox(
+                  height: 30,
+                ),
+                OutlineButton.icon(
+                  onPressed: () {
+                    shareQuote(quote, author);
+                  },
+                  icon: Icon(Icons.share),
+                  label: Text('Share'),
+                  highlightedBorderColor: Colors.purple,
+                ),
               ],
             ),
           ),
