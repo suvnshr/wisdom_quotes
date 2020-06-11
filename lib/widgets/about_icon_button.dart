@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-
 void _launchURL(String url) async {
   if (await canLaunch(url)) {
     await launch(url);
@@ -19,62 +18,70 @@ class AboutIconButton extends StatelessWidget {
         showDialog(
           context: context,
           child: AboutDialog(
-            applicationIcon: ImageIcon(
-              new AssetImage("assets/icon.png"),
-            ),
             applicationName: "Wisdom Quotes",
             applicationVersion: "v1.0",
             children: <Widget>[
-              Row(
-                children: <Widget>[
-                  Text("Quotes from "),
-                  GestureDetector(
-                    child: Text(
-                      " Quotable",
-                      style: TextStyle(
-                        color: Colors.blue,
+              Padding(
+                padding:EdgeInsets.fromLTRB(22, 0, 0, 0),
+                child: Row(
+                  children: <Widget>[
+                    Text("Quotes from"),
+                    GestureDetector(
+                      child: Text(
+                        " Quotable",
+                        style: TextStyle(
+                          color: Colors.blue,
+                        ),
                       ),
+                      onTap: () {
+                        _launchURL("https://github.com/lukePeavey/quotable");
+                      },
                     ),
-                    onTap: () {
-                      _launchURL("https://github.com/lukePeavey/quotable");
-                    },
-                  ),
-                ],
+                  ],
+                ),
               ),
               SizedBox(height: 20),
-              Row(
-                children: <Widget>[
-                  Text("Get the code"),
-                  GestureDetector(
-                    child: Text(
-                      " here",
-                      style: TextStyle(
-                        color: Colors.blue,
+              Padding(
+                padding: const EdgeInsets.fromLTRB(22, 0, 0, 0),
+                child: Row(
+                  children: <Widget>[
+                    Text("Get the code"),
+                    GestureDetector(
+                      child: Text(
+                        " here",
+                        style: TextStyle(
+                          color: Colors.blue,
+                        ),
                       ),
+                      onTap: () {
+                        _launchURL(
+                            "https://github.com/suvansh-rana/wisdom_quotes");
+                      },
                     ),
-                    onTap: () {
-                      _launchURL("https://github.com/suvansh-rana/wisdom_quotes");
-                    },
-                  ),
-                ],
+                  ],
+                ),
               ),
               SizedBox(height: 20),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Text(
-                    "Created by ",
-                  ),
-                  GestureDetector(
-                    child: Text(
-                      " Suvansh",
-                      style: TextStyle(
-                        color: Colors.blue,
-                      ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(22, 0, 0, 0),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
+                      "Created by",
                     ),
-                    onTap: () => _launchURL("https://www.github.com/suvansh-rana"),
-                  ),
-                ],
+                    GestureDetector(
+                      child: Text(
+                        " Suvansh",
+                        style: TextStyle(
+                          color: Colors.blue,
+                        ),
+                      ),
+                      onTap: () =>
+                          _launchURL("https://www.github.com/suvansh-rana"),
+                    ),
+                  ],
+                ),
               ),
             ],
           ),
