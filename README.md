@@ -4,7 +4,7 @@ An app which shows quotes on topics like wisdom, life and technology :stars:
 
 ## Download
 
-Get the APK of the app [here](https://github.com/suvansh-rana/wisdom_quotes/releases/download/v1.0/Wisdom.Quotes.v1.0.apk). More info about the release is available [here](https://github.com/suvansh-rana/wisdom_quotes/releases).
+Get the latest APK of the app [here](https://github.com/suvansh-rana/wisdom_quotes/releases/download/v1.0.1/Wisdom.Quotes.v1.0.1.apk). More info about each releases is available [here](https://github.com/suvansh-rana/wisdom_quotes/releases).
 
 ## Contribute
 
