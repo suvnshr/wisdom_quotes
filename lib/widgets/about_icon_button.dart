@@ -18,70 +18,66 @@ class AboutIconButton extends StatelessWidget {
         showDialog(
           context: context,
           child: AboutDialog(
+            applicationIcon: Image(
+              height: 50,
+              width: 50,
+              image: AssetImage("assets/app_icon.png"),
+            ),
             applicationName: "Wisdom Quotes",
             applicationVersion: "v1.0",
             children: <Widget>[
-              Padding(
-                padding:EdgeInsets.fromLTRB(22, 0, 0, 0),
-                child: Row(
-                  children: <Widget>[
-                    Text("Quotes from"),
-                    GestureDetector(
-                      child: Text(
-                        " Quotable",
-                        style: TextStyle(
-                          color: Colors.blue,
-                        ),
+              Row(
+                children: <Widget>[
+                  Text("Quotes from"),
+                  GestureDetector(
+                    child: Text(
+                      " Quotable",
+                      style: TextStyle(
+                        color: Colors.blue,
                       ),
-                      onTap: () {
-                        _launchURL("https://github.com/lukePeavey/quotable");
-                      },
                     ),
-                  ],
-                ),
+                    onTap: () {
+                      _launchURL("https://github.com/lukePeavey/quotable");
+                    },
+                  ),
+                ],
               ),
               SizedBox(height: 20),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(22, 0, 0, 0),
-                child: Row(
-                  children: <Widget>[
-                    Text("Get the code"),
-                    GestureDetector(
-                      child: Text(
-                        " here",
-                        style: TextStyle(
-                          color: Colors.blue,
-                        ),
+              Row(
+                children: <Widget>[
+                  Text("Get the code at"),
+                  GestureDetector(
+                    child: Text(
+                      " Github",
+                      style: TextStyle(
+                        color: Colors.blue,
                       ),
-                      onTap: () {
-                        _launchURL(
-                            "https://github.com/suvansh-rana/wisdom_quotes");
-                      },
                     ),
-                  ],
-                ),
+                    onTap: () {
+                      _launchURL(
+                          "https://github.com/suvansh-rana/wisdom_quotes");
+                    },
+                  ),
+                ],
               ),
               SizedBox(height: 20),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(22, 0, 0, 0),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    Text(
-                      "Created by",
-                    ),
-                    GestureDetector(
-                      child: Text(
-                        " Suvansh",
-                        style: TextStyle(
-                          color: Colors.blue,
-                        ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    "Created by",
+                  ),
+                  GestureDetector(
+                    child: Text(
+                      " Suvansh",
+                      style: TextStyle(
+                        color: Colors.blue,
                       ),
-                      onTap: () =>
-                          _launchURL("https://www.github.com/suvansh-rana"),
                     ),
-                  ],
-                ),
+                    onTap: () =>
+                        _launchURL("https://www.github.com/suvansh-rana"),
+                  ),
+                ],
               ),
             ],
           ),

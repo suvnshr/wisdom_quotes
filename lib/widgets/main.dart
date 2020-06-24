@@ -13,11 +13,17 @@ class MainApp extends StatefulWidget {
 }
 
 class _MainAppState extends State<MainApp> {
+
+  // > State Variables
+
   String quote = "";
   String author = "";
   String tag = "wisdom";
   List<bool> _selections =
       [true] + List.generate(TAGS.length - 1, (_) => false);
+
+
+  // > Methods
 
   // Stores the user preferred theme using shared preferences
   void setTheme(int themeModeInt) async {
@@ -26,6 +32,7 @@ class _MainAppState extends State<MainApp> {
   }
 
   void loadQuote({String thisTag = "wisdom"}) async {
+
     // Set quote and author to empty to show the loading icon
     setState(() {
       quote = author = "";
@@ -41,7 +48,9 @@ class _MainAppState extends State<MainApp> {
     });
   }
 
+  // change quote category tag
   void setNewTag(int newSelectedIndex, int previouslySelected) {
+    
     // Only load new quote and change state if new selection is made
     if (newSelectedIndex != previouslySelected) {
       setState(() {
@@ -54,15 +63,20 @@ class _MainAppState extends State<MainApp> {
     }
   }
 
+  // returns `CircularProgressIndicator` 
+  // if quote is not yet loaded or is empty
   Widget getStatusWidget() {
-    if (quote == "" && author == "") return Text("Loading ...");
+    if (quote == "" && author == "") return CircularProgressIndicator(
+      strokeWidth: 1.2,
+    );
 
     return Quote(
       quote: quote,
       author: author,
     );
   }
-
+  
+  // shows platform share sheet to share quote
   void shareQuote(quote, author) => Share.share('$quote - $author');
 
   void initState() {
@@ -72,6 +86,7 @@ class _MainAppState extends State<MainApp> {
 
   @override
   Widget build(BuildContext context) {
+
     // Load quote if not already loaded
     if (quote == "" && author == "") loadQuote(thisTag: tag);
 
