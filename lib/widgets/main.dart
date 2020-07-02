@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:wisdom_quotes/helpers.dart';
+import 'package:wisdom_quotes/helpers/db_helper.dart';
 import 'package:wisdom_quotes/widgets/about_icon_button.dart';
 import 'package:wisdom_quotes/widgets/quote.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:share/share.dart';
+import 'package:wisdom_quotes/widgets/quotes_list.dart';
 
 // The main widget
 class MainApp extends StatefulWidget {
@@ -13,17 +15,26 @@ class MainApp extends StatefulWidget {
 }
 
 class _MainAppState extends State<MainApp> {
-
   // > State Variables
-
+  DatabaseHelper _db = DatabaseHelper.instance;
   String quote = "";
   String author = "";
   String tag = "wisdom";
   List<bool> _selections =
       [true] + List.generate(TAGS.length - 1, (_) => false);
 
-
   // > Methods
+
+
+  void _insert() async {
+    // row to insert
+    Map<String, dynamic> row = {
+      DatabaseHelper.columnName: author,
+      DatabaseHelper.columnQuote: quote
+    };
+    final id = await _db.insert(row);
+    print('inserted row id: $id');
+  }
 
   // Stores the user preferred theme using shared preferences
   void setTheme(int themeModeInt) async {
@@ -32,7 +43,6 @@ class _MainAppState extends State<MainApp> {
   }
 
   void loadQuote({String thisTag = "wisdom"}) async {
-
     // Set quote and author to empty to show the loading icon
     setState(() {
       quote = author = "";
@@ -50,7 +60,6 @@ class _MainAppState extends State<MainApp> {
 
   // change quote category tag
   void setNewTag(int newSelectedIndex, int previouslySelected) {
-    
     // Only load new quote and change state if new selection is made
     if (newSelectedIndex != previouslySelected) {
       setState(() {
@@ -63,19 +72,20 @@ class _MainAppState extends State<MainApp> {
     }
   }
 
-  // returns `CircularProgressIndicator` 
+  // returns `CircularProgressIndicator`
   // if quote is not yet loaded or is empty
   Widget getStatusWidget() {
-    if (quote == "" && author == "") return CircularProgressIndicator(
-      strokeWidth: 1.2,
-    );
+    if (quote == "" && author == "")
+      return CircularProgressIndicator(
+        strokeWidth: 1.2,
+      );
 
     return Quote(
       quote: quote,
       author: author,
     );
   }
-  
+
   // shows platform share sheet to share quote
   void shareQuote(quote, author) => Share.share('$quote - $author');
 
@@ -86,7 +96,6 @@ class _MainAppState extends State<MainApp> {
 
   @override
   Widget build(BuildContext context) {
-
     // Load quote if not already loaded
     if (quote == "" && author == "") loadQuote(thisTag: tag);
 
@@ -132,6 +141,14 @@ class _MainAppState extends State<MainApp> {
               setTheme(themeToBeAppliedInt);
             },
           ),
+          IconButton(
+              icon: Icon(Icons.turned_in),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => QuotesListScreen()),
+                );
+              }),
           AboutIconButton(),
         ],
       ),
@@ -171,13 +188,29 @@ class _MainAppState extends State<MainApp> {
                 SizedBox(
                   height: 30,
                 ),
-                OutlineButton.icon(
-                  onPressed: () {
-                    shareQuote(quote, author);
-                  },
-                  icon: Icon(Icons.share),
-                  label: Text('Share'),
-                  highlightedBorderColor: Colors.purple,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    OutlineButton.icon(
+                      onPressed: () {
+                        shareQuote(quote, author);
+                      },
+                      icon: Icon(Icons.share),
+                      label: Text('Share'),
+                      highlightedBorderColor: Colors.purple,
+                    ),
+                    SizedBox(
+                      width: 20.0,
+                    ),
+                    OutlineButton.icon(
+                      onPressed: () {
+                        _insert();
+                      },
+                      icon: Icon(Icons.turned_in_not),
+                      label: Text('Save'),
+                      highlightedBorderColor: Colors.purple,
+                    )
+                  ],
                 ),
               ],
             ),
