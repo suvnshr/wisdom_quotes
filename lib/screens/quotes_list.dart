@@ -28,7 +28,6 @@ class _QuotesListScreenState extends State<QuotesListScreen> {
           icon: Icon(Icons.arrow_back),
           onPressed: () {
             Navigator.pop(context);
-            widget.resetState();
           },
         ),
       ),
@@ -68,6 +67,8 @@ class _QuotesListScreenState extends State<QuotesListScreen> {
                                   setState(() {
                                     dbHelper.delete(item['_id']);
                                   });
+                                  // reset state of `QuoteContainer` screen
+                                  widget.resetState();
 
                                   // Show snackbar
                                   Scaffold.of(context).showSnackBar(
