@@ -24,7 +24,7 @@ class AboutIconButton extends StatelessWidget {
               image: AssetImage("assets/app_icon.png"),
             ),
             applicationName: "Wisdom Quotes",
-            applicationVersion: "v1.2",
+            applicationVersion: "v2",
             children: <Widget>[
               Row(
                 children: <Widget>[
