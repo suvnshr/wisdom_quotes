@@ -37,7 +37,7 @@ class _QuoteContainerState extends State<QuoteContainer> {
       DatabaseHelper.columnName: author,
       DatabaseHelper.columnQuote: quote
     };
-    
+
     await _db.insert(row);
 
     setState(() {
@@ -137,7 +137,6 @@ class _QuoteContainerState extends State<QuoteContainer> {
   void initState() {
     super.initState();
     loadQuote();
-    setQuoteSaved(quoteKey);
   }
 
   @override
