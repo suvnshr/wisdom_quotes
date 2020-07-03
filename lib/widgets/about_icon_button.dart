@@ -24,11 +24,11 @@ class AboutIconButton extends StatelessWidget {
               image: AssetImage("assets/app_icon.png"),
             ),
             applicationName: "Wisdom Quotes",
-            applicationVersion: "v1.0",
+            applicationVersion: "v1.2",
             children: <Widget>[
               Row(
                 children: <Widget>[
-                  Text("Quotes from"),
+                  Text("✨ Quotes from"),
                   GestureDetector(
                     child: Text(
                       " Quotable",
@@ -42,10 +42,10 @@ class AboutIconButton extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(height: 20),
+              Divider(),
               Row(
                 children: <Widget>[
-                  Text("Get the code at"),
+                  Text("🖥️ Get the code at"),
                   GestureDetector(
                     child: Text(
                       " Github",
@@ -60,12 +60,12 @@ class AboutIconButton extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(height: 20),
+              Divider(),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   Text(
-                    "Created by",
+                    "✍️ Created by",
                   ),
                   GestureDetector(
                     child: Text(
@@ -76,6 +76,25 @@ class AboutIconButton extends StatelessWidget {
                     ),
                     onTap: () =>
                         _launchURL("https://www.github.com/suvansh-rana"),
+                  ),
+                ],
+              ),
+                Divider(),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    "🎁 Thanks to our",
+                  ),
+                  GestureDetector(
+                    child: Text(
+                      " contributors !!",
+                      style: TextStyle(
+                        color: Colors.blue,
+                      ),
+                    ),
+                    onTap: () =>
+                        _launchURL("https://github.com/suvansh-rana/wisdom_quotes/graphs/contributors"),
                   ),
                 ],
               ),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wisdom_quotes/widgets/main.dart';
+import 'package:wisdom_quotes/screens/quote_container.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'helpers/theme_defaults.dart';
@@ -60,7 +60,7 @@ class _QuoteAppState extends State<QuoteApp> {
         fontFamily: "average-sans",
         buttonColor: Colors.purpleAccent,
       ),
-      home: MainApp(),
+      home: QuoteContainer(),
     );
   }
 }

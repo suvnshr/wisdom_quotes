@@ -8,16 +8,15 @@ import 'package:path/path.dart';
 
 /// Database Definition and Operations are defined in this class.
 class DatabaseHelper {
-
   static final _databaseName = 'MyDatabase.db';
   static final _databaseVersion = 1;
 
   static final table = 'my_quotes';
 
   static final columnId = '_id';
+  static final columnQuoteKey = 'quotekey';
   static final columnName = 'author';
   static final columnQuote = 'quote';
-
 
   DatabaseHelper._();
   static final DatabaseHelper instance = DatabaseHelper._();
@@ -45,6 +44,7 @@ class DatabaseHelper {
     String query = '''
     CREATE TABLE $table (
             $columnId INTEGER PRIMARY KEY,
+            $columnQuoteKey TEXT NOT NULL,
             $columnName TEXT NOT NULL,
             $columnQuote TEXT NOT NULL
           )
@@ -57,14 +57,39 @@ class DatabaseHelper {
     return await db.insert(table, row);
   }
 
+  Future<List<Map<String, dynamic>>> rowsWithThisKey(String quoteKey) async {
+    Database db = await instance.database;
+    return await db.query(
+      table,
+      columns: [columnQuoteKey],
+      where: '$columnQuoteKey = ?',
+      whereArgs: [quoteKey],
+    );
+  }
+
   Future<List<Map<String, dynamic>>> queryAllRows() async {
     Database db = await instance.database;
-    return await db.query(table);
+    return await db.query(
+      table,
+      orderBy: '$columnId DESC',
+    );
   }
 
   Future<int> delete(int id) async {
     Database db = await instance.database;
-    return await db.delete(table, where: '$columnId = ?', whereArgs: [id]);
+    return await db.delete(
+      table,
+      where: '$columnId = ?',
+      whereArgs: [id],
+    );
   }
 
+  Future<int> deleteByKey(String quoteKey) async {
+    Database db = await instance.database;
+    return await db.delete(
+      table,
+      where: '$columnQuoteKey = ?',
+      whereArgs: [quoteKey],
+    );
+  }
 }

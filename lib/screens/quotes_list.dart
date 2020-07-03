@@ -3,6 +3,12 @@ import 'package:share/share.dart';
 import 'package:wisdom_quotes/helpers/db_helper.dart';
 
 class QuotesListScreen extends StatefulWidget {
+  final Function resetState;
+
+  QuotesListScreen({
+    this.resetState,
+  });
+
   @override
   _QuotesListScreenState createState() => _QuotesListScreenState();
 }
@@ -18,6 +24,13 @@ class _QuotesListScreenState extends State<QuotesListScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Saved Quotes'),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context);
+            widget.resetState();
+          },
+        ),
       ),
       body: FutureBuilder(
         future: dbHelper.queryAllRows(),
@@ -27,8 +40,8 @@ class _QuotesListScreenState extends State<QuotesListScreen> {
               ? snapshot.data.length != 0
                   ? ListView.separated(
                       separatorBuilder: (context, index) {
-                        return SizedBox(
-                          height: 10,
+                        return Divider(
+                          height: 12,
                         );
                       },
                       itemCount: snapshot.data.length,
@@ -47,14 +60,31 @@ class _QuotesListScreenState extends State<QuotesListScreen> {
                                 },
                               ),
                               SizedBox(
-                                width: 5,
+                                width: 10,
                               ),
                               InkWell(
-                                child: Icon(Icons.delete),
+                                child: Icon(Icons.delete_outline),
                                 onTap: () {
                                   setState(() {
                                     dbHelper.delete(item['_id']);
                                   });
+
+                                  // Show snackbar
+                                  Scaffold.of(context).showSnackBar(
+                                    SnackBar(
+                                      elevation: 2,
+                                      backgroundColor:
+                                          Colors.purple[800].withOpacity(0.6),
+                                      content: Text(
+                                        "Quote deleted",
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: "Mali",
+                                        ),
+                                      ),
+                                    ),
+                                  );
                                 },
                               ),
                             ],
